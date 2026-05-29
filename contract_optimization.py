@@ -19,7 +19,6 @@ class LPContractOptimizer:
         '''
         out = [
             (F[-1] - F[:-1])@t >= c[-1]-c[:-1],
-            t>=0,
         ]
         if monotone:
             out.append(t[:-1]<=t[1:])
@@ -32,7 +31,7 @@ class LPContractOptimizer:
         F[[target,-1]] = F[[-1,target]]
         c = c.copy()
         c[[target,-1]] = c[[-1,target]]
-        t = cp.Variable(m)
+        t = cp.Variable(m,nonneg=True)
         obj = cls.objective(F=F,t=t,**kwargs)
         constraints = cls.constraints(F,c,t,monotone)
         prob = cp.Problem(cp.Minimize(obj), constraints)
@@ -86,4 +85,3 @@ class DiscreteInspectionContractOptimizer:
             raise RuntimeError('Optimal contract not found')
         obj = minpay_obj + (p*q0[target])@d
         return combined_t, obj
-    

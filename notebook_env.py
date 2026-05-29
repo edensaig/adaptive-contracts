@@ -13,8 +13,8 @@ plt.rcParams.update({
     'text.usetex': True,
     'text.latex.preamble': r'''
     \usepackage{amsmath,amsfonts,amssymb,bm}
-    \newcommand{\bq}{\bm{q}}
-    \newcommand{\bp}{\bm{p}}
+    \newcommand{\bq}{\mathbf{q}}
+    \newcommand{\bp}{\mathbf{p}}
     ''',
 })
 
